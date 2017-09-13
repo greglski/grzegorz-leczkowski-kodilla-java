@@ -10,10 +10,12 @@ public class Triangle implements Shape{
         this.altitude = altitude;
     }
 
+    @Override
     public String getShapeName(){
         return Triangle.class.getName();
     }
 
+    @Override
     public double getField(){
         return base * altitude / 2;
     }

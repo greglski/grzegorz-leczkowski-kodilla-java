@@ -8,10 +8,12 @@ public class Square implements Shape{
         this.side = side;
     }
 
+    @Override
     public String getShapeName(){
         return Square.class.getName();
     }
 
+    @Override
     public double getField(){
         return side * side;
     }

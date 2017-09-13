@@ -8,10 +8,12 @@ public class Circle implements Shape{
         this.radius = radius;
     }
 
+    @Override
     public String getShapeName(){
         return Circle.class.getName();
     }
 
+    @Override
     public double getField(){
         return 3.14 * radius * radius;
     }
