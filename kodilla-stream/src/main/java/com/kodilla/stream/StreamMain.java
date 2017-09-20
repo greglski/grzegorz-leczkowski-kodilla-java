@@ -1,44 +1,40 @@
 package com.kodilla.stream;
 
-import com.kodilla.stream.beautifier.PoemBeautifier;
-import com.kodilla.stream.iterate.NumbersGenerator;
-import com.kodilla.stream.lambda.ExecuteSaySomething;
-import com.kodilla.stream.lambda.ExpressionExecutor;
-import com.kodilla.stream.lambda.Processor;
-import com.kodilla.stream.lambda.SaySomething;
-import com.kodilla.stream.reference.FunctionalCalculator;
+import com.kodilla.stream.book.Book;
+import com.kodilla.stream.book.BookDirectory;
+import com.kodilla.stream.forumuser.Forum;
+import com.kodilla.stream.forumuser.ForumUser;
+
+
+import java.time.*;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StreamMain {
     public static void main(String[] args) {
-        Processor processor = new Processor();
-        //ExecuteSaySomething executeSaySomething = new ExecuteSaySomething();
-        processor.execute(() -> System.out.println("This is an example text"));
 
-        ExpressionExecutor expressionExecutor = new ExpressionExecutor();
+        BookDirectory theBookDirectory = new BookDirectory();
+        String theResultListOfBooks = theBookDirectory.getList().stream()
+                .filter(book -> book.getYearOfPublication() >2005)
+                .map(Book::toString)
+                .collect(Collectors.joining(",\n", "<<", ">>"));
+        System.out.println(theResultListOfBooks);
 
-        System.out.println("Calculating expressions with lambdas");
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a + b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a - b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a * b);
-        expressionExecutor.executeExpression(10, 5, (a, b) -> a / b);
-
-        System.out.println("Calculating expressions with method reference");
-        expressionExecutor.executeExpression(3,4, FunctionalCalculator::multiplyAByB);
-        expressionExecutor.executeExpression(3,4, FunctionalCalculator::addAToB);
-        expressionExecutor.executeExpression(3,4, FunctionalCalculator::subBFromA);
-        expressionExecutor.executeExpression(3,4, FunctionalCalculator::divideAByB);
+//        7.3 Zadanie: funkcyjny spacer po liście użytkowników forum
 
         System.out.println();
-        System.out.println("Beautifying poem");
-        PoemBeautifier poemBeautifier = new PoemBeautifier();
+        System.out.println("Forum users");
+        System.out.println();
 
-        poemBeautifier.beautify("Great poem", (poem -> poem + " on lambdas"));
-        poemBeautifier.beautify("Great poem", (poem -> poem.toUpperCase()));
-        poemBeautifier.beautify("Great poem", (poem -> poem.substring(0,1).toLowerCase() + poem.substring(1).toUpperCase()));
-        poemBeautifier.beautify("Great poem", (poem -> poem.substring(6)));
-        poemBeautifier.beautify("Great poem", (poem -> "The greatest" + poem.substring(5)));
+        Forum forum = new Forum();
+        Map<Integer, ForumUser> resultMapOfUsers = forum.getUserList().stream()
+                .filter(user -> user.getUserSex() == 'M')
+                .filter(user -> Period.between(user.getDateOfBirth(), LocalDate.now()).getYears() >= 20)
+                .filter(user -> user.getNumberOfUserPosts() >= 1)
+                .collect(Collectors.toMap(ForumUser::getUserId, user -> user));
 
-        System.out.println("Using Stream to generate even numbers from 1 to 20");
-        NumbersGenerator.generateEven(20);
+        resultMapOfUsers.entrySet().stream()
+                .map(entry -> entry.getKey() + " : " + entry.getValue())
+                .forEach(System.out::println);
     }
 }
