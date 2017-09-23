@@ -27,13 +27,12 @@ public class StreamMain {
         System.out.println();
 
         Forum forum = new Forum();
-        Map<Integer, ForumUser> resultMapOfUsers = forum.getUserList().stream()
+        forum.getUserList().stream()
                 .filter(user -> user.getUserSex() == 'M')
                 .filter(user -> Period.between(user.getDateOfBirth(), LocalDate.now()).getYears() >= 20)
                 .filter(user -> user.getNumberOfUserPosts() >= 1)
-                .collect(Collectors.toMap(ForumUser::getUserId, user -> user));
-
-        resultMapOfUsers.entrySet().stream()
+                .collect(Collectors.toMap(ForumUser::getUserId, user -> user))
+                .entrySet().stream()
                 .map(entry -> entry.getKey() + " : " + entry.getValue())
                 .forEach(System.out::println);
     }
