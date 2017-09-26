@@ -24,6 +24,9 @@ public class FirstChallenge {
         } catch (ArithmeticException e) {
 
             System.out.println("Error: " + e);
+
+        } finally {
+            System.out.println("We are here. If you make error we will tell:-)");
         }
     }
 }
