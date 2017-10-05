@@ -6,7 +6,7 @@ public class HealthyShopSupplier implements SupplierOrderService {
 
     public boolean process(SupplierOrderRequest supplierOrderRequest) {
         if (supplierOrderRequest.getSupplierName().equals(this.supplierName)) {
-            System.out.println("Processing order the " + supplierOrderRequest.getSupplierName() + " way." + "\n" +
+            System.out.println("Processing isOrdered the " + supplierOrderRequest.getSupplierName() + " way." + "\n" +
                     "Ordered product: " + supplierOrderRequest.getProduct().getProductName() +
                     "; quantity: " + supplierOrderRequest.getQuantity());
             return true;

@@ -7,14 +7,14 @@ public class SupplierOrderProcessing {
         this.supplierOrderService = supplierOrderService;
     }
 
-    public DTO orderProcess(SupplierOrderRequest supplierOrderRequest) {
-        boolean order = supplierOrderService.process(supplierOrderRequest);
-        if (order) {
+    public OrderDTO orderProcess(SupplierOrderRequest supplierOrderRequest) {
+        boolean isOrdered = supplierOrderService.process(supplierOrderRequest);
+        if (isOrdered) {
             System.out.println("Order processed");
-            return new DTO(supplierOrderRequest.getSupplierName(), order);
+            return new OrderDTO(supplierOrderRequest.getSupplierName(), isOrdered);
         } else {
             System.out.println("Order not processed");
-            return new DTO(supplierOrderRequest.getSupplierName(), order);
+            return new OrderDTO(supplierOrderRequest.getSupplierName(), isOrdered);
         }
     }
 
