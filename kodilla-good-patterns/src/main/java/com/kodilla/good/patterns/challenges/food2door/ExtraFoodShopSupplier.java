@@ -1,17 +1,15 @@
 package com.kodilla.good.patterns.challenges.food2door;
 
-public class ExtraFoodShopSupplier implements SupplierOrderService{
+public class ExtraFoodShopSupplier implements Supplier {
     private String supplierName = "ExtraFoodShop";
     private String supplierCity = "Zamość";
 
+    @Override
     public boolean process(SupplierOrderRequest supplierOrderRequest) {
-        if (supplierOrderRequest.getSupplierName().equals(this.supplierName)) {
-            System.out.println("Processing isOrdered the " + supplierOrderRequest.getSupplierName() + " way." + "\n" +
-                    "Ordered product: " + supplierOrderRequest.getProduct().getProductName() +
-                    "; quantity: " + supplierOrderRequest.getQuantity());
-            return true;
-        }
-        return false;
+        System.out.println("Processing isOrdered the " + supplierOrderRequest.getSupplier().getSupplierName() + " way." + "\n" +
+                "Ordered product: " + supplierOrderRequest.getProduct().getProductName() +
+                "; quantity: " + supplierOrderRequest.getQuantity());
+        return true;
     }
 
     public String getSupplierName() {

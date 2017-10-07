@@ -1,16 +1,16 @@
 package com.kodilla.good.patterns.challenges.food2door;
 
 public class OrderDTO {
-    public String supplierName;
+    public Supplier supplier;
     public boolean isOrdered;
 
-    public OrderDTO(final String supplierName, final boolean isOrdered) {
-        this.supplierName = supplierName;
+    public OrderDTO(final Supplier supplier, final boolean isOrdered) {
+        this.supplier = supplier;
         this.isOrdered = isOrdered;
     }
 
-    public String getSupplierName() {
-        return supplierName;
+    public Supplier getSupplier() {
+        return supplier;
     }
 
     public boolean isOrdered() {
