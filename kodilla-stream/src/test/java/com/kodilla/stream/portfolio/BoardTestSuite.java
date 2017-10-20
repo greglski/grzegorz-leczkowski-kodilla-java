@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -148,7 +148,7 @@ public class BoardTestSuite {
                 .filter(inProgressTasks::contains)
                 .flatMap(tl -> tl.getTasks().stream())
                 .map(t -> t.getCreated())
-                .mapToLong(ld -> Period.between(ld, LocalDate.now()).getDays())
+                .mapToLong(ld -> ChronoUnit.DAYS.between(ld, LocalDate.now()))
                 .average()
                 .getAsDouble();
         // Then
