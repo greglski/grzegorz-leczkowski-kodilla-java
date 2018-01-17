@@ -8,5 +8,6 @@ include 'kodilla-good-patterns'
 include 'kodilla-checkers'
 include 'kodilla-spring-intro'
 include 'kodilla-patterns'
+include 'kodilla-patterns2'
 include 'kodilla-jdbc'
 
