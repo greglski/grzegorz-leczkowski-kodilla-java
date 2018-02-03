@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
 
@@ -38,7 +39,12 @@ public class StoredProcTestSuite {
         statement.executeUpdate(sqlUpdate);
         //When
         String sqlProcedureCall = "CALL UpdateBestsellers()";
-        statement.execute(sqlProcedureCall);
+        try {
+            statement.execute(sqlProcedureCall);
+        } catch (SQLException e) {
+            System.out.println("Wystąpił błąd bazy danych: " + e);
+            throw e;
+        }
         //Then
         String sqlCheckTable = "SELECT COUNT(*) AS HOW_MANY FROM BOOKS WHERE BESTSELLER=-1";
         ResultSet rs = statement.executeQuery(sqlCheckTable);
